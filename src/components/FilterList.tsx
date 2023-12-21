@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import Chip from "./ui/Chip";
 
 const fakeFilters = {
@@ -89,9 +90,31 @@ const fakeFilters = {
   ],
 };
 
-// ACTIVE: border border-black rounded-[30px]
+// ACTIVE: border border-black 
 
-const FilterList = () => {
+type FilterListProps = {
+  categoriesChosen: string[]
+  setCategoriesChosen: Dispatch<SetStateAction<string[]>>;
+};
+
+const FilterList = ({ categoriesChosen,setCategoriesChosen }: FilterListProps) => {
+  
+  const handleCategoryChoose = (title: string) => {
+    setCategoriesChosen((prev: string[]) => {
+      const categoryExist = prev.find((el) => el === title);
+
+      if (categoryExist) {
+        // Remove already added categories
+        return prev.filter((el) => {
+          return el != title;
+        });
+      }
+
+      // Return new list with added category
+      return [...prev, title];
+    });
+  };
+
   return (
     <div className="flex justify-center">
       <div className="flex w-[700px] overflow-x-auto gap-x-[24px]">
@@ -100,7 +123,8 @@ const FilterList = () => {
             key={chipInfo.id}
             background_color={chipInfo.background_color}
             title={chipInfo.title}
-            propClassName="py-[8px] px-[16px]"
+            propClassName={`${categoriesChosen.includes(chipInfo.title) ? "border-2 border-black" : "border-2 border-transparent "}  py-[8px] px-[16px] cursor-pointer`}
+            onClick={handleCategoryChoose}
           />
         ))}
       </div>

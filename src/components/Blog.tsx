@@ -1,14 +1,15 @@
 import BlogImage from "../assets/blog-image.png";
 import Chip from "./ui/Chip";
 import ArrowSVG from "../assets/svg/arrow.svg";
-import { BlogType } from "./InitialBlogs";
 
+type BlogProps = {
+  blogInfo: BlogType
+}
 
-
-const Blog = ({blogInfo}: any) => {
+const Blog = ({blogInfo}: BlogProps) => {
   return (
     <div key={blogInfo.id} className="flex flex-col gap-[16px] basis-[31%]">
-      <img src={BlogImage} alt="blog" className="mb-[8px]" />
+      <img src={BlogImage} alt="blog" className="mb-[8px] h-[328px] w-[408px]" />
       <div className="flex flex-col gap-y-[8px]">
         <h3 className=" text-[#1A1A1F] text-[16px] leading-[20px] font-semibold">
           {blogInfo.author}
@@ -21,7 +22,7 @@ const Blog = ({blogInfo}: any) => {
         {blogInfo.title}
       </h2>
       <div className="flex gap-x-[16px]">
-        {blogInfo.categories.map((chipInfo: any) => (
+        {blogInfo.categories.map((chipInfo) => (
           <Chip
             key={chipInfo.id}
             title={chipInfo.title}

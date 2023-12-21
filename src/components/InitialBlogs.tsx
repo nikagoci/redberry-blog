@@ -1,27 +1,11 @@
-
 import Blog from "./Blog";
 
-export type BlogType = {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
-    publish_date: string;
-    categories: {
-      id: number;
-      title: string;
-      text_color: string;
-      background_color: string;
-    }[];
-    author: string;
-  };
+type InitialBlogsProps = {
+  categoriesChosen: string[];
+};
 
-  type FakeBlogsType = {
-    data: BlogType[]
-  }
-
-const InitialBlogs = () => {
-  const fakeBlogs: FakeBlogsType = {
+const InitialBlogs = ({ categoriesChosen }: InitialBlogsProps) => {
+  const fakeBlogs: { data: BlogType[] } = {
     data: [
       {
         id: 1,
@@ -37,6 +21,18 @@ const InitialBlogs = () => {
             text_color: "#ffffff",
             background_color: "#000000",
           },
+          {
+            id: 3,
+            title: "ხელოვნური ინტელექტი",
+            text_color: "#B71FDD",
+            background_color: "#B11CD6",
+          },
+          {
+            id: 2,
+            title: "აპლიკაცია",
+            text_color: "#15C972",
+            background_color: "#1CD67D",
+          },
         ],
         author: "გელა გელაშვილი",
       },
@@ -50,9 +46,15 @@ const InitialBlogs = () => {
         categories: [
           {
             id: 1,
-            title: "Category title",
-            text_color: "#ffffff",
-            background_color: "#000000",
+            title: "მარკეტი",
+            text_color: "#D6961C",
+            background_color: "#FFBB2F",
+          },
+          {
+            id: 4,
+            title: "UI/UX",
+            text_color: "#DC2828",
+            background_color: "#FA5757",
           },
         ],
         author: "გელა გელაშვილი",
@@ -66,10 +68,10 @@ const InitialBlogs = () => {
         publish_date: "2023-11-19 00:00:00",
         categories: [
           {
-            id: 1,
-            title: "Category title",
-            text_color: "#ffffff",
-            background_color: "#000000",
+            id: 12,
+            title: "სამშენებლო",
+            text_color: "#B71FDD",
+            background_color: "#B11CD6",
           },
           {
             id: 13,
@@ -95,10 +97,10 @@ const InitialBlogs = () => {
         publish_date: "2023-11-19 00:00:00",
         categories: [
           {
-            id: 1,
-            title: "Category title",
-            text_color: "#ffffff",
-            background_color: "#000000",
+            id: 12,
+            title: "სამშენებლო",
+            text_color: "#B71FDD",
+            background_color: "#B11CD6",
           },
           {
             id: 13,
@@ -121,10 +123,20 @@ const InitialBlogs = () => {
   return (
     <section className="mt-[62px]">
       <div className="def-container">
-        <div className="flex justify-between items-start gap-x-[32px] gap-y-[56px] flex-wrap">
-          {fakeBlogs.data.map((blogInfo) => (
-            <Blog key={blogInfo.id} blogInfo={blogInfo} />
-          ))}
+        <div className="flex  items-start gap-x-[32px] gap-y-[56px] flex-wrap">
+          {fakeBlogs.data
+            .filter((blog) => {
+              // Check if category is chosen. If it isn't return every blog
+              if (categoriesChosen.length === 0) return blog;
+
+              // Filter blogs by category. If any blog contains at least one category, return blog.
+              return blog.categories.some((category) =>
+                categoriesChosen.includes(category.title)
+              );
+            })
+            .map((blogInfo) => (
+              <Blog key={blogInfo.id} blogInfo={blogInfo} />
+            ))}
         </div>
       </div>
     </section>
