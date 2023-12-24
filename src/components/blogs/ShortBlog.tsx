@@ -1,15 +1,21 @@
-import BlogImage from "../assets/blog-image.png";
-import Chip from "./ui/Chip";
-import ArrowSVG from "../assets/svg/arrow.svg";
+import { Link } from "react-router-dom";
 
-type BlogProps = {
-  blogInfo: BlogType
-}
+import Chip from "../ui/Chip";
+import BlogImage from "../../assets/blog-image.png";
+import ArrowSVG from "../../assets/svg/arrow.svg";
 
-const Blog = ({blogInfo}: BlogProps) => {
+type ShortBlogProps = {
+  blogInfo: BlogType;
+};
+
+const ShortBlog = ({ blogInfo }: ShortBlogProps) => {
   return (
-    <div key={blogInfo.id} className="flex flex-col gap-[16px] basis-[31%]">
-      <img src={BlogImage} alt="blog" className="mb-[8px] h-[328px] w-[408px]" />
+    <div className="flex flex-col gap-[16px] basis-[31%]">
+      <img
+        src={BlogImage}
+        alt="blog"
+        className="mb-[8px] h-[328px] w-[408px]"
+      />
       <div className="flex flex-col gap-y-[8px]">
         <h3 className=" text-[#1A1A1F] text-[16px] leading-[20px] font-semibold">
           {blogInfo.author}
@@ -35,12 +41,15 @@ const Blog = ({blogInfo}: BlogProps) => {
         {blogInfo.description}
       </p>
       <div>
-        <button className="text-[#5D37F3] text-[14px] leading-[20px] flex gap-x-[4px]">
+        <Link
+          to={`/blog/${blogInfo.id}`}
+          className="text-[#5D37F3] text-[14px] leading-[20px] flex gap-x-[4px]"
+        >
           სრულად ნახვა <img src={ArrowSVG} alt="arrow" />
-        </button>
+        </Link>
       </div>
     </div>
   );
 };
 
-export default Blog;
+export default ShortBlog;

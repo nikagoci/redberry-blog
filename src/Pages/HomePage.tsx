@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import Header from '../components/Header'
 import FilterList from '../components/FilterList'
-import InitialBlogs from '../components/InitialBlogs'
+import InitialBlogs from '../components/blogs/InitialBlogs'
 
 const HomePage = () => {
   const [categoriesChosen, setCategoriesChosen] = useState<string[]>([])

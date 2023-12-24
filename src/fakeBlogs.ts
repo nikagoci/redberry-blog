@@ -1,11 +1,4 @@
-import Blog from "./Blog";
-
-type InitialBlogsProps = {
-  categoriesChosen: string[];
-};
-
-const InitialBlogs = ({ categoriesChosen }: InitialBlogsProps) => {
-  const fakeBlogs: { data: BlogType[] } = {
+export const fakeBlogs: { data: BlogType[] } = {
     data: [
       {
         id: 1,
@@ -89,10 +82,10 @@ const InitialBlogs = ({ categoriesChosen }: InitialBlogsProps) => {
         author: "გელა გელაშვილი",
       },
       {
-        id: 3,
+        id: 5,
         title: "Blog title",
         description:
-          "6 თვის შემდეგ ყველის ბრმა დეგუსტაციის დროც დადგა. მაქსიმალური სიზუსტისთვის, ეს პროცესი დიდხანს გაგრძელდა, კარგად შეისწავლა და შედეგებიც დაიდო. ამ შედეგებს მოგახსენებთ",
+          "test თვის შემდეგ ყველის ბრმა დეგუსტაციის დროც დადგა. მაქსიმალური სიზუსტისთვის, ეს პროცესი დიდხანს გაგრძელდა, კარგად შეისწავლა და შედეგებიც დაიდო. ამ შედეგებს მოგახსენებთ",
         image: "https://via.placeholder.com/150",
         publish_date: "2023-11-19 00:00:00",
         categories: [
@@ -119,28 +112,3 @@ const InitialBlogs = ({ categoriesChosen }: InitialBlogsProps) => {
       },
     ],
   };
-
-  return (
-    <section className="mt-[62px]">
-      <div className="def-container">
-        <div className="flex  items-start gap-x-[32px] gap-y-[56px] flex-wrap">
-          {fakeBlogs.data
-            .filter((blog) => {
-              // Check if category is chosen. If it isn't return every blog
-              if (categoriesChosen.length === 0) return blog;
-
-              // Filter blogs by category. If any blog contains at least one category, return blog.
-              return blog.categories.some((category) =>
-                categoriesChosen.includes(category.title)
-              );
-            })
-            .map((blogInfo) => (
-              <Blog key={blogInfo.id} blogInfo={blogInfo} />
-            ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default InitialBlogs;
