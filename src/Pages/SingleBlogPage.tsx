@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 
-
 import { fakeBlogs } from "../fakeBlogs";
 import FullBlog from "../components/blogs/FullBlog";
 import SimiliarBlogs from "../components/blogs/SimiliarBlogs";
@@ -15,8 +14,8 @@ const SingleBlogPage = () => {
 
   return (
     <div className="bg-[#F3F2FA] pb-[96px] pt-[40px] ">
-      <FullBlog fakeBlog={fakeBlog} />
-      <SimiliarBlogs />
+      <FullBlog blogInfo={fakeBlog} />
+      <SimiliarBlogs chosenBlog={fakeBlog} />
     </div>
   );
 };

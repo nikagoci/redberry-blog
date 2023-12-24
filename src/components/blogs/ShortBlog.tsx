@@ -14,7 +14,7 @@ const ShortBlog = ({ blogInfo }: ShortBlogProps) => {
       <img
         src={BlogImage}
         alt="blog"
-        className="mb-[8px] h-[328px] w-[408px]"
+        className="mb-[8px] h-[328px] w-full"
       />
       <div className="flex flex-col gap-y-[8px]">
         <h3 className=" text-[#1A1A1F] text-[16px] leading-[20px] font-semibold">

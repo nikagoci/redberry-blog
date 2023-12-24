@@ -10,8 +10,8 @@ const InitialBlogs = ({ categoriesChosen }: InitialBlogsProps) => {
 
   return (
     <section className="mt-[62px]">
-      <div className="def-container">
-        <div className="flex  items-start gap-x-[32px] gap-y-[56px] flex-wrap">
+      <div className="def-container ">
+        <div className="flex items-start gap-x-[32px] gap-y-[56px] flex-wrap">
           {fakeBlogs.data
             .filter((blog) => {
               // Check if category is chosen. If it isn't return every blog
@@ -25,7 +25,8 @@ const InitialBlogs = ({ categoriesChosen }: InitialBlogsProps) => {
             .map((blogInfo) => (
               <div
                 key={blogInfo.id}
-                className="flex flex-col gap-[16px] basis-[31%]"
+                className="basis-[31%] flex flex-col gap-[16px] "
+                
               >
                 <ShortBlog blogInfo={blogInfo} />
               </div>
