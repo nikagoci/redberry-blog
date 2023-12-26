@@ -1,3 +1,6 @@
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios';
+
 import { fakeBlogs } from "../../fakeBlogs";
 import ShortBlog from "./ShortBlog";
 
@@ -5,8 +8,26 @@ type InitialBlogsProps = {
   categoriesChosen: string[];
 };
 
+const fetchBlogs = async() => {
+  const result = await axios.get("https://api.blog.redberryinternship.ge/api/blogs", {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`
+    },
+  
+  })
+
+  return result.data
+}
+
 const InitialBlogs = ({ categoriesChosen }: InitialBlogsProps) => {
 
+  const { isLoading, data: blogs} = useQuery({ queryKey: ["blogs"], queryFn: fetchBlogs })
+
+
+  if(isLoading) {
+    return <h1>Loading</h1>
+  }
 
   return (
     <section className="mt-[62px]">
