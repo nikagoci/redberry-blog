@@ -21,9 +21,7 @@ const fetchBlogs = async() => {
 }
 
 const InitialBlogs = ({ categoriesChosen }: InitialBlogsProps) => {
-
   const { isLoading, data: blogs} = useQuery({ queryKey: ["blogs"], queryFn: fetchBlogs })
-
 
   if(isLoading) {
     return <h1>Loading</h1>
